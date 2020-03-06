@@ -9,7 +9,7 @@ export const styles = StyleSheet.create({
     backgroundColor:"#666161"
   },
   button: {
-    marginTop: 20,
+    marginTop: 10,
     paddingVertical: 10,
     alignItems: "center",
     borderColor: "#d3d3d3",
@@ -20,7 +20,7 @@ export const styles = StyleSheet.create({
   border: {
     width: "80%",
     margin: 10,
-    padding: 15,
+    padding: 10,
     fontSize: 16,
     borderColor: "#d3d3d3",
     borderBottomWidth: 1,

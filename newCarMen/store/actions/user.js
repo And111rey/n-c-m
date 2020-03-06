@@ -1,4 +1,6 @@
-import firebase from "firebase"
+//import firebase from "firebase"
+import firebase from "../../congif/fireBase"
+
 
 export const loginActionCreater = (email, password) => {
     return async (dispatch) => {
@@ -36,4 +38,15 @@ export const loginSignUp = ({email, password, name}) => {
             console.log(err)
         }
     }
+}
+
+export const update = (data) => {
+    console.log("DATA__>>>>______>>", data.userKey)
+    return async (dispatch) => {
+         //await fetch(`https://car-magage.firebaseio.com/${data.userKey}.json`, {
+         //       method: "GET",
+         //       headers:{"Content-Type": "aplication/json"},
+         //       //body: JSON.stringify(data)
+         //   }).then((res) => { console.log("RESULT FROM DB _____>>.>>", res)})
+    } 
 }
