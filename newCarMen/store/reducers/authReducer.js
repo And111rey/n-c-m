@@ -5,7 +5,7 @@ export const authReducer = (state=false, action) => {
             return {...state, data: action.payload}
         case "SIGNUP":
             const res = {...state, data: action.payload.user} 
-            console.log("STATE   ", action.payload)
+            console.log("DATA ON REDUCER AFTER REGISTRATION_____>>>>>   ", action.payload)
             return {...state, data: action.payload}
         default:
             return state
@@ -13,6 +13,7 @@ export const authReducer = (state=false, action) => {
 }
 
 
-export const settingsData = (state={}, action) => {
+
+export const getDataFromServer = (state={}, actio) => {
     return state
 }

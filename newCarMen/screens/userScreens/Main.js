@@ -1,16 +1,22 @@
-import React, {useState} from 'react';
-
-import {useSelector } from "react-redux"
+import React, {useState, useEffect} from 'react';
+import { useDispatch, useSelector } from "react-redux"
+//import {useSelector } from "react-redux"
 import {styles} from "../../style"
 import { Text, View, Button, TextInput, onChangeText, TouchableWithoutFeedback, TouchableOpacity , Keyboard } from 'react-native';
-
+import { getDataFromServerAction } from "../../store/actions/user"
 
 
 
 export const MainScreen = ({navigation}) => {
-    
-  const dataUser = useSelector(state => state.authReducer)
-  console.log(dataUser) 
+  
+  useEffect(() => {
+    getDataFromServerAction()
+  }, [])
+
+  
+
+  const userKey = useSelector((state) => state.authReducer.data)
+  console.log("DATA IN MAIN SCREEN ", userKey) 
   return (
     <TouchableWithoutFeedback onPress={() => {Keyboard.dismiss()}}>
         <View style={styles.container}>

@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 
 import {useDispatch, useSelector} from "react-redux"
 import {styles} from "../../style"
@@ -9,9 +9,9 @@ import { update } from "../../store/actions/user"
 export const SettingsScreen = ({navigation}) => {
   
   const dispatch = useDispatch()
-  const userKey = useSelector((state) => state.authReducer.data)
+  const userKeys = useSelector((state) => state.authReducer.data)
 
-  console.log("UUUUUU__________> ", userKey)
+  //console.log("UUUUUU____that which come from state to settings screen______> ", userKeys)
 
   const [carName, setCarName] = useState("") 
   const [engine, setEngine] = useState(false)
@@ -21,10 +21,18 @@ export const SettingsScreen = ({navigation}) => {
   const [Func1, setFunc1] = useState(false)
   const [Func2, setFunc2] = useState(false)
   const [Func3, setFunc3] = useState(false)
+  
+  
 
 
   const hendlerUpdata = () => {
-    let settingsData = {carName, engine, cond, signal, Func1, Func2, Func3, userKey }
+
+    //console.log("SE_____>", selectedFunctions)
+    const serviceData = {uid: userKeys.uid, dbID: userKeys.dataID}
+    //console.log("serviceData", serviceData)
+    
+    let settingsData = {serviceData, carName, functions: [{engine}, {cond}, {signal}, {Func1}, {Func2}, {Func3}], }
+    //console.log("-----_created object______-------", settingsData)
     dispatch(update(settingsData))
 }
 
@@ -32,9 +40,9 @@ export const SettingsScreen = ({navigation}) => {
 
   return (
     <TouchableWithoutFeedback onPress={() => {Keyboard.dismiss()}}>
-        <View style={styles.container} value={carName} onChangeText={hendlerUpdata}>
+        <View style={styles.container} value={carName} >
             
-            <TextInput  style={[styles.border, styles.textColor]} placeholder="Enter the name of your car"/>
+            <TextInput  style={[styles.border, styles.textColor]} onChangeText={setCarName} placeholder="Enter the name of your car"/>
             <ScrollView>
             <TouchableOpacity onPress={hendlerUpdata} style={[styles.button,{backgroundColor: "#949fd1"}]} >
                 <Text>Create</Text>
