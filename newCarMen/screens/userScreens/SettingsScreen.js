@@ -33,8 +33,12 @@ export const SettingsScreen = ({navigation}) => {
     
     let settingsData = {serviceData, carName, functions: [{engine}, {cond}, {signal}, {Func1}, {Func2}, {Func3}], }
     //console.log("-----_created object______-------", settingsData)
+    useEffect(() => {
+      dispatch(getDataFromServerAction(userKeys))
+    }, [])
+
     dispatch(createSettings(settingsData))
-      .then(()=> dispatch(getDataFromServerAction(userKeys)) )
+      //.then(()=> dispatch(getDataFromServerAction(userKeys)) )
       .then(()=> navigation.navigate("Main"))
     } else {
       alert("The name of your car is very small :-(")
