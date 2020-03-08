@@ -3,8 +3,8 @@ import React, {useState, useEffect} from 'react';
 import {useDispatch, useSelector} from "react-redux"
 import {styles} from "../../style"
 import {StyleSheet, ScrollView, Text, View, Button, TextInput, onChangeText, TouchableWithoutFeedback, TouchableOpacity , Keyboard } from 'react-native';
-import { update } from "../../store/actions/user"
-
+import { createSettings } from "../../store/actions/user"
+import { getDataFromServerAction } from "../../store/actions/user"
 
 export const SettingsScreen = ({navigation}) => {
   
@@ -23,17 +23,23 @@ export const SettingsScreen = ({navigation}) => {
   const [Func3, setFunc3] = useState(false)
   
   
-
+  //const userKeys = useSelector((state) => state.authReducer.data)
 
   const hendlerUpdata = () => {
-
-    //console.log("SE_____>", selectedFunctions)
+    if(carName.length > 0) {
+          //console.log("SE_____>", selectedFunctions)
     const serviceData = {uid: userKeys.uid, dbID: userKeys.dataID}
     //console.log("serviceData", serviceData)
     
     let settingsData = {serviceData, carName, functions: [{engine}, {cond}, {signal}, {Func1}, {Func2}, {Func3}], }
     //console.log("-----_created object______-------", settingsData)
-    dispatch(update(settingsData))
+    dispatch(createSettings(settingsData))
+      .then(()=> dispatch(getDataFromServerAction(userKeys)) )
+      .then(()=> navigation.navigate("Main"))
+    } else {
+      alert("The name of your car is very small :-(")
+    }
+
 }
 
 
