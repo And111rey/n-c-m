@@ -10,8 +10,10 @@ export const SettingsScreen = ({navigation}) => {
   
   const dispatch = useDispatch()
   const userKeys = useSelector((state) => state.authReducer.data)
+  const reduser11 = useSelector((state) => state.authReducer)////////
+  console.log("___SETTINGS-SCREEN______STATE-DATA_____> ", userKeys)
+  console.log("___SETTINGS-SCREEN______STATE-DATA_____> ", reduser11)
 
-  //console.log("UUUUUU____that which come from state to settings screen______> ", userKeys)
 
   const [carName, setCarName] = useState("") 
   const [engine, setEngine] = useState(false)
@@ -22,7 +24,9 @@ export const SettingsScreen = ({navigation}) => {
   const [Func2, setFunc2] = useState(false)
   const [Func3, setFunc3] = useState(false)
   
-  
+  //useEffect(() => {
+  //  dispatch(getDataFromServerAction(userKeys))
+  //}, [])
   //const userKeys = useSelector((state) => state.authReducer.data)
 
   const hendlerUpdata = () => {
@@ -33,12 +37,10 @@ export const SettingsScreen = ({navigation}) => {
     
     let settingsData = {serviceData, carName, functions: [{engine}, {cond}, {signal}, {Func1}, {Func2}, {Func3}], }
     //console.log("-----_created object______-------", settingsData)
-    useEffect(() => {
-      dispatch(getDataFromServerAction(userKeys))
-    }, [])
+
 
     dispatch(createSettings(settingsData))
-      //.then(()=> dispatch(getDataFromServerAction(userKeys)) )
+      .then(()=> dispatch(getDataFromServerAction(userKeys)) )
       .then(()=> navigation.navigate("Main"))
     } else {
       alert("The name of your car is very small :-(")

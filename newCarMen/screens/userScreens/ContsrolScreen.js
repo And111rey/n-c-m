@@ -3,11 +3,12 @@ import React, {useState, useEffect} from 'react';
 import {styles} from "../../style"
 import {StyleSheet, ScrollView, Text, View, Button, TextInput, onChangeText, TouchableWithoutFeedback, TouchableOpacity , Keyboard } from 'react-native';
 
-export const ControlScreen = ({navigation}) => {
-  
+export const ControlScreen = ({route, navigation}) => {
+  console.log("___CONTROLL SCREEN___  ", route.params.data)
+const { carName,  } = route.params.data
   return (
         <View style={styles.container}  >
-            <Text>Controll screen</Text>
+            <Text>{carName}</Text>
         </View>
   );
 }

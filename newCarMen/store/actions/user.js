@@ -14,14 +14,19 @@ export const loginActionCreater = (email, password) => {
                      // body: JSON.stringify({uid: key, userData:{email, name}})
                   })
             const dataRes =  await response.json()
-            const dataID = Object.keys(dataRes)[0]      
-                  dispatch({type: "LOGIN", payload: {uid: key, dataID: dataID}})
+            const dataID = Object.keys(dataRes)[0]   
+            console.log("FITST.....", dataID  )
+            const responseAllData = await fetch(`https://car-magage.firebaseio.com/${key}/${dataID}.json`,{
+                method: "GET",
+                headers: {"Content-Type": "aplication/json"}
+            })
+            const data = await responseAllData.json()
+            console.log("ТО ЧТО ПОЙДЕТ В СТЕЙТ РЕДЮССЕРА.....", data)
+                  dispatch({type: "LOGIN", payload: {...data, dataID}})
         } catch (err) {alert(err)}
 
     }
 }
-
-
 
 export const loginSignUp = ({email, password, name}) => {
     return async (dispatch) => {
@@ -37,7 +42,8 @@ export const loginSignUp = ({email, password, name}) => {
                   })
             const dataID =  await response.json()      
                   //console.log("/*/-/-*/-*/-*/-*/-*", key , "-*-*-*", dataID)
-                  dispatch({type: "SIGNUP", payload: {uid: key, dataID: dataID.name}})
+                  
+                  dispatch({type: "SIGNUP", payload: {uid: key, dataID: dataID.name, userData:{email, name}}})
         } catch(err) {
             console.log(err)
         }
@@ -47,9 +53,25 @@ export const loginSignUp = ({email, password, name}) => {
 
 
 
+export const getDataFromServerAction = ({uid, dataID}) => {
+    console.log("СРАБОТАЛ userEffect-[] пришли данные с SettingsCreen"  ,uid , "---- ", dataID)
+
+    return async (dispatch) => {
+        const response = await fetch(`https://car-magage.firebaseio.com/${uid}/${dataID}.json`,{
+            method: "GET",
+            headers: {"Content-Type": "aplication/json"}
+        })
+        const data = await response.json()
+        console.log("Данные получены с сервера__Все ДАННЫЕ ИЗ СЕРВЕРА_>>>>>>>_______", data)
+        dispatch({type: "SIGNUP", payload: {...data, dataID} })
+    }
+}
+
+
+
 
 export const createSettings = ({serviceData:{uid, dbID}, carName, functions}) => {
-    console.log(">>__DATA FrOM SETTING___>>", )    
+    console.log("_____ACTION-CREAT_ DATA__FROM-SETTIN__>>", uid, " ____ ",  dbID," ____ ", carName," ____ ", functions)    
     return async () => {
         let selectedFunctions = functions.filter((el, i, arr) => {
             for (let key in el) {
@@ -71,16 +93,3 @@ export const createSettings = ({serviceData:{uid, dbID}, carName, functions}) =>
 
 
 
-export const getDataFromServerAction = ({uid, dataID}) => {
-    //console.log("useEffect  ==>>>>> __It__TWORKS____",uid )
-
-    return async (dispatch) => {
-        const response = await fetch(`https://car-magage.firebaseio.com/${uid}/${dataID}.json`,{
-            method: "GET",
-            headers: {"Content-Type": "aplication/json"}
-        })
-        const data = await response.json()
-        console.log("GET DATA FROM SERVER____>>>>>>>_______", data)
-        dispatch({type: "GET_ALL_DATA", payload: data})
-    }
-}

@@ -4,8 +4,7 @@ export const authReducer = (state=false, action) => {
             console.log("LOGINING.......  ", action.payload)
             return {...state, data: action.payload}
         case "SIGNUP":
-            const res = {...state, data: action.payload.user} 
-            console.log("REGISTRATION........   ", action.payload)
+            console.log("...STATE.....   ", action.payload)
             return {...state, data: action.payload}
         default:
             return state
