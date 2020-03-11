@@ -71,12 +71,13 @@ export const getDataFromServerAction = ({uid, dataID}) => {
 
 
 export const createSettings = ({serviceData:{uid, dbID}, carName, functions}) => {
-    console.log("_____ACTION-CREAT_ DATA__FROM-SETTIN__>>", uid, " ____ ",  dbID," ____ ", carName," ____ ", functions)    
+    console.log("_____ACTION-CREAT_ DATA__FROM-SETTIN__>>", uid, " ____ ",  dbID," ____ ", carName," ____ ", functions)
+    console.log("_____FUNCTIONS COMES__TO__ ACTION____", functions)    
     return async () => {
         let selectedFunctions = functions.filter((el, i, arr) => {
             for (let key in el) {
-               if (el[key] === true) {
-                //console.log("......",el)
+               if (el[key].add === true) {
+                console.log("..*/*/*/*/*/*/*/*/....",el[key].add)
                 return carName
                }
             }
@@ -91,5 +92,15 @@ export const createSettings = ({serviceData:{uid, dbID}, carName, functions}) =>
 }
 
 
+export const updateSwitchableFunctions = ({uid, dataID, carName, number, element, switchData}) => {
+    //console.log("_____  received_____", switchData)
+    return async (dispatch) => {
+        await fetch(`https://car-magage.firebaseio.com/${uid}/${dataID}/cars/${carName}/selectedFunctions/${number}/${element}.json`, {
+               method: "PATCH",
+               headers:{"Content-Type": "aplication/json"},
+               body: JSON.stringify( switchData)
+           })
 
+    }
+} 
 

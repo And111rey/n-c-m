@@ -28,22 +28,17 @@ export const MainScreen = ({navigation}) => {
   
 
 
-  const contentFunctions = () => {
-  
-  }
+ 
 
-
-  
-
-
+ 
   
   let renderElent = ""
-
+  console.log("______ALL_DATA__ IN____main_____", allData)
   if(allData.data.cars){
     const carsArray = Object.keys(allData.data.cars)
     renderElent = carsArray.map((el, i) => {
       return (
-        <TouchableOpacity key={i} onPress={() => navigation.navigate("Control", {data: allData.data.cars[el]})} style={styles.button} >
+        <TouchableOpacity key={i} onPress={() => navigation.navigate("Control", {data: allData.data.cars[el],  dataID: allData.data.dataID,  uid: allData.data.uid})} style={styles.button} >
           <Text>{el}</Text>
         </TouchableOpacity> 
       )
@@ -59,7 +54,6 @@ export const MainScreen = ({navigation}) => {
             <Text style={{marginTop: 40}}>User name: {allData.data.userData.name}</Text> 
             <Text>User Em@il: {allData.data.userData.email}</Text>
             <Text>jhjkhkjhkjh</Text>
-            <Button title="Switch" onPress={() =>navigation.navigate("Control")}/>
             {renderElent}
         </View>
     </TouchableWithoutFeedback>    

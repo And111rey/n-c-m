@@ -16,18 +16,15 @@ export const SettingsScreen = ({navigation}) => {
 
 
   const [carName, setCarName] = useState("") 
-  const [engine, setEngine] = useState(false)
-  const [cond, setCond] = useState(false)
-  const [signal, setSignal] = useState(false)
+  const [engine, setEngine] = useState({add:false, internalState: false})
+  const [cond, setCond] = useState({add:false, internalState: false})
+  const [signal, setSignal] = useState({add:false, internalState: false})
 
-  const [Func1, setFunc1] = useState(false)
-  const [Func2, setFunc2] = useState(false)
-  const [Func3, setFunc3] = useState(false)
+  const [Func1, setFunc1] = useState({add:false, internalState: false})
+  const [Func2, setFunc2] = useState({add:false, internalState: false})
+  const [Func3, setFunc3] = useState({add:false, internalState: false})
   
-  //useEffect(() => {
-  //  dispatch(getDataFromServerAction(userKeys))
-  //}, [])
-  //const userKeys = useSelector((state) => state.authReducer.data)
+  console.log("-----ПРОВЕРКА НАБОРА -------", engine.add)
 
   const hendlerUpdata = () => {
     if(carName.length > 0) {
@@ -36,7 +33,7 @@ export const SettingsScreen = ({navigation}) => {
     //console.log("serviceData", serviceData)
     
     let settingsData = {serviceData, carName, functions: [{engine}, {cond}, {signal}, {Func1}, {Func2}, {Func3}], }
-    //console.log("-----_created object______-------", settingsData)
+    console.log("-----ПРОВЕРКА НАБОРА -------", settingsData)
 
 
     dispatch(createSettings(settingsData))
@@ -66,29 +63,29 @@ export const SettingsScreen = ({navigation}) => {
 
 
             
-            <TouchableOpacity style={[styles.button, {backgroundColor:engine? "#DCCB3D": "#949799"}]} onPress={()=>{setEngine(!engine)}}>
-                <Text style={{color: (engine? "red": "#006400")}} > {engine? "Engine added": "Engine "}</Text>
+            <TouchableOpacity style={[styles.button, {backgroundColor:engine.add? "#DCCB3D": "#949799"}]} onPress={()=>{setEngine({...engine, add: !engine.add})}}>
+                <Text style={{color: (engine.add? "red": "#006400")}} > {engine.add? "Engine added": "Engine "}</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity style={[styles.button, {backgroundColor:cond? "#DCCB3D": "#949799"}]} onPress={()=>{setCond(!cond)}} >
-                <Text style={{color: (cond? "red": "#006400")}} >{cond? "Conditioner  added": "Conditioner"}</Text>
+            <TouchableOpacity style={[styles.button, {backgroundColor:cond.add? "#DCCB3D": "#949799"}]} onPress={()=>{setCond({...cond, add: !cond.add})}} >
+                <Text style={{color: (cond.add? "red": "#006400")}} >{cond.add? "Conditioner  added": "Conditioner"}</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity style={[styles.button, {backgroundColor:signal? "#DCCB3D": "#949799"}]} onPress={()=>{setSignal(!signal)}} >
-                <Text style={{color: (signal? "red": "#006400")}} >{signal? "Signal added": "Signal"}</Text>
+            <TouchableOpacity style={[styles.button, {backgroundColor:signal.add? "#DCCB3D": "#949799"}]} onPress={()=>{setSignal({...signal, add: !signal.add})}} >
+                <Text style={{color: (signal.add? "red": "#006400")}} >{signal.add? "Signal added": "Signal"}</Text>
             </TouchableOpacity>
             
 
-            <TouchableOpacity style={[styles.button, {backgroundColor:Func1? "#DCCB3D": "#949799"}]} onPress={()=>{setFunc1(!Func1)}}>
-                <Text style={{color: (Func1? "red": "#006400")}} > {Func1? "Func1 added": "Func1"}</Text>
+            <TouchableOpacity style={[styles.button, {backgroundColor:Func1.add? "#DCCB3D": "#949799"}]} onPress={()=>{setFunc1({...Func1, add: !Func1.add})}}>
+                <Text style={{color: (Func1.add? "red": "#006400")}} > {Func1.add? "Func1 added": "Func1"}</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity style={[styles.button, {backgroundColor:Func2? "#DCCB3D": "#949799"}]} onPress={()=>{setFunc2(!Func2)}} >
-                <Text style={{color: (Func2? "red": "#006400")}} >{Func2? "Func2 added": "Func2"}</Text>
+            <TouchableOpacity style={[styles.button, {backgroundColor:Func2.add? "#DCCB3D": "#949799"}]} onPress={()=>{setFunc2({...Func2, add: !Func2.add})}} >
+                <Text style={{color: (Func2.add? "red": "#006400")}} >{Func2.add? "Func2 added": "Func2"}</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity style={[styles.button, {backgroundColor:Func3? "#DCCB3D": "#949799"}]} onPress={()=>{setFunc3(!Func3)}} >
-                <Text style={{color: (Func3? "red": "#006400")}} >{Func3? "Func3 active": "Func3"}</Text>
+            <TouchableOpacity style={[styles.button, {backgroundColor:Func3.add? "#DCCB3D": "#949799"}]} onPress={()=>{setFunc3({...Func3, add: !Func3.add})}} >
+                <Text style={{color: (Func3.add? "red": "#006400")}} >{Func3.add? "Func3 active": "Func3"}</Text>
             </TouchableOpacity>
         
         
