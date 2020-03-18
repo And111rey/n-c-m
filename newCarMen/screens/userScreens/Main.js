@@ -8,32 +8,9 @@ import { ControlScreen } from "./ContsrolScreen"
 
 export const MainScreen = ({navigation}) => {
   
-  
-
- 
-
   const allData = useSelector((state) => state.authReducer)
-  //useEffect(() => {
-  //  setData(allData)
-  //      
-  //    
-  //}, [allData])
- 
 
-
-  
-
-  console.log("_____MAIN_SCREEN____STATE-DATA___", allData)
-  
-  
-
-
- 
-
- 
-  
   let renderElent = ""
-  console.log("______ALL_DATA__ IN____main_____", allData)
   if(allData.data.cars){
     const carsArray = Object.keys(allData.data.cars)
     renderElent = carsArray.map((el, i) => {
